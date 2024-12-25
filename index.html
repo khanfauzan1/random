@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Time Since June 1, 2024</title>
+    <title>Age Calculator</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
         
@@ -35,7 +35,33 @@
             font-weight: 600;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1em;
+        }
+        input[type="date"], button {
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            margin: 5px 0;
+            outline: none;
+        }
+        button {
+            background: #2a5298;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #1e3c72;
+        }
         .counter {
+            margin-top: 20px;
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
@@ -46,12 +72,12 @@
             overflow: hidden;
         }
         .number {
-            font-size: 2.5em;
+            font-size: 2em;
             font-weight: bold;
             background: rgba(255, 255, 255, 0.2);
             border-radius: 10px;
             padding: 10px;
-            min-width: 60px;
+            min-width: 80px;
             display: inline-block;
             margin-bottom: 5px;
         }
@@ -61,70 +87,69 @@
             letter-spacing: 1px;
             font-weight: 300;
         }
-
-        @media (max-width: 375px) {
-            .container {
-                padding: 15px;
-                width: 95%;
-            }
-            h1 {
-                font-size: 1.5em;
-                margin-bottom: 15px;
-            }
-            .number {
-                font-size: 2em;
-                min-width: 50px;
-                padding: 8px;
-            }
-            .label {
-                font-size: 0.7em;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Time Since June 1, 2024</h1>
+        <h1>Age Calculator</h1>
+        <form id="ageForm">
+            <label for="dob">Enter Your Date of Birth:</label>
+            <input type="date" id="dob" required>
+            
+            <label for="customDate">Enter a Specific Date (optional):</label>
+            <input type="date" id="customDate">
+            
+            <button type="submit">Calculate Age</button>
+        </form>
         <div class="counter">
+            <div class="time-unit">
+                <div id="years" class="number">00</div>
+                <div class="label">Years</div>
+            </div>
+            <div class="time-unit">
+                <div id="months" class="number">00</div>
+                <div class="label">Months</div>
+            </div>
             <div class="time-unit">
                 <div id="days" class="number">00</div>
                 <div class="label">Days</div>
-            </div>
-            <div class="time-unit">
-                <div id="hours" class="number">00</div>
-                <div class="label">Hours</div>
-            </div>
-            <div class="time-unit">
-                <div id="minutes" class="number">00</div>
-                <div class="label">Minutes</div>
-            </div>
-            <div class="time-unit">
-                <div id="seconds" class="number">00</div>
-                <div class="label">Seconds</div>
             </div>
         </div>
     </div>
 
     <script>
-        function updateTimeSince1stJune2024() {
-            const startDate = new Date(2024, 5, 1);
-            const currentDate = new Date();
+        function calculateAge(dob, customDate = null) {
+            const birthDate = new Date(dob);
+            const currentDate = customDate ? new Date(customDate) : new Date();
             
-            const differenceInTime = currentDate.getTime() - startDate.getTime();
+            let years = currentDate.getFullYear() - birthDate.getFullYear();
+            let months = currentDate.getMonth() - birthDate.getMonth();
+            let days = currentDate.getDate() - birthDate.getDate();
             
-            const days = Math.floor(differenceInTime / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((differenceInTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((differenceInTime % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((differenceInTime % (1000 * 60)) / 1000);
+            if (days < 0) {
+                months -= 1;
+                days += new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate();
+            }
+            if (months < 0) {
+                years -= 1;
+                months += 12;
+            }
             
+            document.getElementById('years').textContent = years.toString().padStart(2, '0');
+            document.getElementById('months').textContent = months.toString().padStart(2, '0');
             document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
         }
 
-        updateTimeSince1stJune2024();
-        setInterval(updateTimeSince1stJune2024, 1000);
+        document.getElementById('ageForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const dob = document.getElementById('dob').value;
+            const customDate = document.getElementById('customDate').value;
+            if (dob) {
+                calculateAge(dob, customDate);
+            } else {
+                alert('Please enter your date of birth.');
+            }
+        });
     </script>
 </body>
 </html>
