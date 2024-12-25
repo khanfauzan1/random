@@ -93,11 +93,8 @@
     <div class="container">
         <h1>Age Calculator</h1>
         <form id="ageForm">
-            <label for="dob">Enter Your Date of Birth:</label>
-            <input type="date" id="dob" required>
-            
-            <label for="customDate">Enter a Specific Date (optional):</label>
-            <input type="date" id="customDate">
+            <label for="customDate">Enter a Specific Date to Calculate Age:</label>
+            <input type="date" id="customDate" required>
             
             <button type="submit">Calculate Age</button>
         </form>
@@ -118,9 +115,11 @@
     </div>
 
     <script>
-        function calculateAge(dob, customDate = null) {
+        const dob = "2001-01-01"; // Replace this with your actual date of birth.
+
+        function calculateAge(customDate) {
             const birthDate = new Date(dob);
-            const currentDate = customDate ? new Date(customDate) : new Date();
+            const currentDate = new Date(customDate);
             
             let years = currentDate.getFullYear() - birthDate.getFullYear();
             let months = currentDate.getMonth() - birthDate.getMonth();
@@ -142,12 +141,11 @@
 
         document.getElementById('ageForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            const dob = document.getElementById('dob').value;
             const customDate = document.getElementById('customDate').value;
-            if (dob) {
-                calculateAge(dob, customDate);
+            if (customDate) {
+                calculateAge(customDate);
             } else {
-                alert('Please enter your date of birth.');
+                alert('Please enter a valid date.');
             }
         });
     </script>
