@@ -1,330 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enhanced Age Calculator</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-        
-        body, html {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        .container {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            text-align: center;
-            width: 90%;
-            max-width: 700px;
-        }
-        h1 {
-            margin-bottom: 30px;
-            font-size: 2.2em;
-            font-weight: 600;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-        .section {
-            margin-bottom: 30px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .section h2 {
-            margin-top: 0;
-            font-size: 1.4em;
-            font-weight: 600;
-            color: #ffffff;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-        form {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 1em;
-            font-weight: 400;
-        }
-        input[type="date"], button, select {
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1em;
-            margin: 8px 0;
-            outline: none;
-            width: 100%;
-            max-width: 300px;
-        }
-        button {
-            background: linear-gradient(135deg, #2a5298, #1e3c72);
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        button:hover {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-        .counter {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        .time-unit {
-            position: relative;
-            overflow: hidden;
-        }
-        .number {
-            font-size: 2.2em;
-            font-weight: bold;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 15px;
-            min-width: 90px;
-            display: inline-block;
-            margin-bottom: 8px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-        .label {
-            font-size: 0.9em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 300;
-        }
-        .birthday-selector {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        .birthday-option {
-            padding: 12px 24px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-        }
-        .birthday-option.active {
-            background: rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: scale(1.05);
-        }
-        .birthday-option:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-        .future-date-section {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-        }
-        .countdown-display {
-            font-size: 1.8em;
-            font-weight: 600;
-            color: #ffeb3b;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            margin-top: 15px;
-            padding: 15px;
-            background: rgba(255, 235, 59, 0.1);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 235, 59, 0.3);
-        }
-        .input-group {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        @media (max-width: 600px) {
-            .birthday-selector {
-                flex-direction: column;
-                align-items: center;
-            }
-            .birthday-option {
-                width: 200px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Enhanced Age Calculator</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+    body, html {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      text-align: center;
+      width: 90%;
+      max-width: 700px;
+    }
+    h1 {
+      margin-bottom: 30px;
+      font-size: 2.2em;
+      font-weight: 600;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    .section {
+      margin-bottom: 30px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .section h2 {
+      margin-top: 0;
+      font-size: 1.4em;
+      font-weight: 600;
+    }
+    form {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+    input[type="date"], button, select {
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1em;
+      margin: 8px 0;
+      width: 100%;
+      max-width: 300px;
+    }
+    button {
+      background: linear-gradient(135deg, #2a5298, #1e3c72);
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    button:hover {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .counter {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .time-unit .number {
+      font-size: 2.2em;
+      font-weight: bold;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 15px;
+      min-width: 90px;
+      display: inline-block;
+    }
+    .label {
+      font-size: 0.9em;
+      text-transform: uppercase;
+      font-weight: 300;
+    }
+    .future-date-section {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    }
+    .countdown-display {
+      font-size: 1.8em;
+      font-weight: 600;
+      color: #ffeb3b;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      margin-top: 15px;
+      padding: 15px;
+      background: rgba(255, 235, 59, 0.1);
+      border-radius: 10px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Enhanced Age Calculator</h1>
-        
-        <!-- Age Calculation Section -->
-        <div class="section">
-            <h2>Your Age Calculator</h2>
-            <div class="birthday-selector">
-                <div class="birthday-option active" data-birthday="real">
-                    Real Birthday<br><small>March 4, 2000</small>
-                </div>
-                <div class="birthday-option" data-birthday="paper">
-                    Paper Birthday<br><small>November 30, 2001</small>
-                </div>
-            </div>
-            <form id="ageForm">
-                <label for="customDate">Calculate Age as of Date:</label>
-                <input type="date" id="customDate" required>
-                <button type="submit">Calculate Age</button>
-            </form>
-            <div class="counter">
-                <div class="time-unit">
-                    <div id="years" class="number">00</div>
-                    <div class="label">Years</div>
-                </div>
-                <div class="time-unit">
-                    <div id="months" class="number">00</div>
-                    <div class="label">Months</div>
-                </div>
-                <div class="time-unit">
-                    <div id="days" class="number">00</div>
-                    <div class="label">Days</div>
-                </div>
-            </div>
+  <div class="container">
+    <h1>Enhanced Age Calculator</h1>
+    <div class="section">
+      <h2>Your Age (Based on Paper Birthday)</h2>
+      <form id="ageForm">
+        <label for="customDate">Calculate Age as of Date:</label>
+        <input type="date" id="customDate" required>
+        <button type="submit">Calculate Age</button>
+      </form>
+      <div class="counter">
+        <div class="time-unit">
+          <div id="years" class="number">00</div>
+          <div class="label">Years</div>
         </div>
-
-        <!-- Future Date Countdown Section -->
-        <div class="section future-date-section">
-            <h2>Days Until Future Date</h2>
-            <form id="futureForm">
-                <div class="input-group">
-                    <div>
-                        <label for="futureDate">Select Future Date:</label>
-                        <input type="date" id="futureDate" required>
-                    </div>
-                    <div>
-                        <label for="eventName">Event Name (Optional):</label>
-                        <input type="text" id="eventName" placeholder="e.g., Birthday, Anniversary">
-                    </div>
-                </div>
-                <button type="submit">Calculate Countdown</button>
-            </form>
-            <div id="countdownResult" class="countdown-display" style="display: none;"></div>
+        <div class="time-unit">
+          <div id="months" class="number">00</div>
+          <div class="label">Months</div>
         </div>
+        <div class="time-unit">
+          <div id="days" class="number">00</div>
+          <div class="label">Days</div>
+        </div>
+      </div>
     </div>
 
-    <script>
-        const realBirthday = "2000-03-04";
-        const paperBirthday = "2001-11-30";
-        let selectedBirthday = realBirthday;
+    <div class="section future-date-section">
+      <h2>Days Until Future Date</h2>
+      <form id="futureForm">
+        <label for="futureDate">Select Future Date:</label>
+        <input type="date" id="futureDate" required>
+        <label for="eventName">Event Name (Optional):</label>
+        <input type="text" id="eventName" placeholder="e.g., Birthday, Anniversary">
+        <button type="submit">Calculate Countdown</button>
+      </form>
+      <div id="countdownResult" class="countdown-display" style="display: none;"></div>
+    </div>
+  </div>
 
-        // Set today's date as default
-        document.getElementById('customDate').valueAsDate = new Date();
-        document.getElementById('futureDate').valueAsDate = new Date();
+  <script>
+    const paperBirthday = "2001-11-30";
+    let selectedBirthday = paperBirthday;
 
-        // Calculate age on page load
-        calculateAge(new Date().toISOString().split('T')[0]);
+    document.getElementById('customDate').valueAsDate = new Date();
+    document.getElementById('futureDate').valueAsDate = new Date();
 
-        // Birthday selector
-        document.querySelectorAll('.birthday-option').forEach(option => {
-            option.addEventListener('click', function() {
-                document.querySelectorAll('.birthday-option').forEach(opt => opt.classList.remove('active'));
-                this.classList.add('active');
-                selectedBirthday = this.getAttribute('data-birthday') === 'real' ? realBirthday : paperBirthday;
-                
-                // Recalculate age if a date is selected
-                const customDate = document.getElementById('customDate').value;
-                if (customDate) {
-                    calculateAge(customDate);
-                }
-            });
-        });
+    calculateAge(new Date().toISOString().split('T')[0]);
 
-        function calculateAge(customDate) {
-            const birthDate = new Date(selectedBirthday);
-            const currentDate = new Date(customDate);
-            
-            let years = currentDate.getFullYear() - birthDate.getFullYear();
-            let months = currentDate.getMonth() - birthDate.getMonth();
-            let days = currentDate.getDate() - birthDate.getDate();
-            
-            if (days < 0) {
-                months -= 1;
-                days += new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate();
-            }
-            if (months < 0) {
-                years -= 1;
-                months += 12;
-            }
-            
-            document.getElementById('years').textContent = years.toString().padStart(2, '0');
-            document.getElementById('months').textContent = months.toString().padStart(2, '0');
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-        }
+    function calculateAge(customDate) {
+      const birthDate = new Date(selectedBirthday);
+      const currentDate = new Date(customDate);
 
-        function calculateDaysUntil(futureDate, eventName = '') {
-            const today = new Date();
-            const targetDate = new Date(futureDate);
-            const timeDiff = targetDate.getTime() - today.getTime();
-            const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-            
-            const countdownElement = document.getElementById('countdownResult');
-            
-            if (daysDiff > 0) {
-                const eventText = eventName ? ` until ${eventName}` : '';
-                countdownElement.innerHTML = `${daysDiff} days${eventText}`;
-                countdownElement.style.display = 'block';
-            } else if (daysDiff === 0) {
-                const eventText = eventName ? ` - ${eventName} is today!` : ' - It\'s today!';
-                countdownElement.innerHTML = `🎉 ${eventText}`;
-                countdownElement.style.display = 'block';
-            } else {
-                const eventText = eventName ? ` since ${eventName}` : '';
-                countdownElement.innerHTML = `${Math.abs(daysDiff)} days${eventText} have passed`;
-                countdownElement.style.display = 'block';
-            }
-        }
+      let years = currentDate.getFullYear() - birthDate.getFullYear();
+      let months = currentDate.getMonth() - birthDate.getMonth();
+      let days = currentDate.getDate() - birthDate.getDate();
 
-        // Age form submission
-        document.getElementById('ageForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const customDate = document.getElementById('customDate').value;
-            if (customDate) {
-                calculateAge(customDate);
-            } else {
-                alert('Please enter a valid date.');
-            }
-        });
+      if (days < 0) {
+        months -= 1;
+        days += new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate();
+      }
+      if (months < 0) {
+        years -= 1;
+        months += 12;
+      }
 
-        // Future date form submission
-        document.getElementById('futureForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const futureDate = document.getElementById('futureDate').value;
-            const eventName = document.getElementById('eventName').value.trim();
-            if (futureDate) {
-                calculateDaysUntil(futureDate, eventName);
-            } else {
-                alert('Please enter a valid future date.');
-            }
-        });
+      document.getElementById('years').textContent = years.toString().padStart(2, '0');
+      document.getElementById('months').textContent = months.toString().padStart(2, '0');
+      document.getElementById('days').textContent = days.toString().padStart(2, '0');
+    }
 
-        // Auto-calculate when date changes
-        document.getElementById('customDate').addEventListener('change', function() {
-            if (this.value) {
-                calculateAge(this.value);
-            }
-        });
-    </script>
+    function calculateDaysUntil(futureDate, eventName = '') {
+      const today = new Date();
+      const targetDate = new Date(futureDate);
+      const timeDiff = targetDate.getTime() - today.getTime();
+      const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+      const countdownElement = document.getElementById('countdownResult');
+      if (daysDiff > 0) {
+        const eventText = eventName ? ` until ${eventName}` : '';
+        countdownElement.innerHTML = `${daysDiff} days${eventText}`;
+      } else if (daysDiff === 0) {
+        const eventText = eventName ? ` - ${eventName} is today!` : ' - It\'s today!';
+        countdownElement.innerHTML = `🎉 ${eventText}`;
+      } else {
+        const eventText = eventName ? ` since ${eventName}` : '';
+        countdownElement.innerHTML = `${Math.abs(daysDiff)} days${eventText} have passed`;
+      }
+      countdownElement.style.display = 'block';
+    }
+
+    document.getElementById('ageForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const customDate = document.getElementById('customDate').value;
+      if (customDate) {
+        calculateAge(customDate);
+      }
+    });
+
+    document.getElementById('futureForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const futureDate = document.getElementById('futureDate').value;
+      const eventName = document.getElementById('eventName').value.trim();
+      if (futureDate) {
+        calculateDaysUntil(futureDate, eventName);
+      }
+    });
+
+    document.getElementById('customDate').addEventListener('change', function () {
+      if (this.value) {
+        calculateAge(this.value);
+      }
+    });
+  </script>
 </body>
 </html>
