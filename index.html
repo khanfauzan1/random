@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Personal Dashboard – Fauzan Ahmad</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>Personal Dashboard</title>
 
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
     :root {
       --primary-bg: linear-gradient(135deg, #1e3c72, #2a5298);
       --glass-bg: rgba(255, 255, 255, 0.1);
@@ -21,36 +21,36 @@
       font-family: 'Poppins', sans-serif;
       background: var(--primary-bg);
       min-height: 100vh;
+      color: #fff;
       display: flex;
       justify-content: center;
-      color: #fff;
     }
 
     .container {
+      width: 100%;
+      max-width: 720px;
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
-      backdrop-filter: blur(14px);
+      backdrop-filter: blur(12px);
       border-radius: 20px;
-      padding: 40px 30px;
-      width: 100%;
-      max-width: 900px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+      padding: 35px 30px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 30px;
       font-weight: 600;
+      margin-bottom: 25px;
     }
 
     .section {
-      margin-bottom: 40px;
+      margin-bottom: 35px;
     }
 
     label {
       display: block;
       margin-bottom: 6px;
-      font-weight: 500;
+      font-size: 0.9rem;
     }
 
     input, button {
@@ -58,9 +58,9 @@
       padding: 14px;
       border-radius: 12px;
       border: none;
-      margin-bottom: 15px;
       font-family: inherit;
       font-size: 1rem;
+      margin-bottom: 14px;
     }
 
     input {
@@ -73,56 +73,54 @@
       color: #fff;
       font-weight: bold;
       cursor: pointer;
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-
-    button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
     }
 
     .counter {
       display: flex;
-      justify-content: space-around;
-      gap: 20px;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 15px;
       margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .time-unit {
+      flex: 1;
+      text-align: center;
     }
 
     .number {
-      font-size: 2.3rem;
-      font-weight: bold;
+      font-size: 2.2rem;
       background: rgba(255,255,255,0.2);
-      padding: 15px 22px;
       border-radius: 12px;
-      min-width: 90px;
-      text-align: center;
+      padding: 15px;
+      margin-bottom: 6px;
+      font-weight: bold;
     }
 
     .label {
-      text-align: center;
       font-size: 0.8rem;
-      opacity: 0.85;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
     .countdown-display {
-      margin-top: 20px;
+      margin-top: 15px;
       padding: 18px;
-      border-radius: 12px;
       background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.3);
-      font-size: 1.4rem;
-      color: var(--accent);
+      border-radius: 12px;
       text-align: center;
+      color: var(--accent);
       display: none;
     }
+
+    /* INFO CARDS */
 
     .info-card {
       background: rgba(255,255,255,0.12);
       border: 1px solid rgba(255,255,255,0.25);
       border-radius: 16px;
       padding: 24px;
-      margin-top: 30px;
+      margin-bottom: 30px;
     }
 
     .info-card h2 {
@@ -131,18 +129,25 @@
     }
 
     .info-card h3 {
-      margin: 18px 0 8px;
+      margin-top: 18px;
+      margin-bottom: 8px;
       font-size: 1.1rem;
     }
 
     .info-card ul {
       padding-left: 18px;
-      line-height: 1.7;
+      margin: 0;
+    }
+
+    .info-card li {
+      font-size: 0.95rem;
+      line-height: 1.6;
     }
 
     .quote {
       font-style: italic;
       opacity: 0.9;
+      margin-bottom: 10px;
     }
 
     .tag {
@@ -151,7 +156,15 @@
       border-radius: 20px;
       background: rgba(255,255,255,0.2);
       font-size: 0.75rem;
-      margin: 4px 4px 0 0;
+      margin: 4px 6px 0 0;
+    }
+
+    /* PROGRESS */
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
     }
 
     .progress-bar {
@@ -159,7 +172,7 @@
       background: rgba(255,255,255,0.15);
       border-radius: 12px;
       overflow: hidden;
-      margin-bottom: 16px;
+      margin: 6px 0 16px;
     }
 
     .progress-fill {
@@ -167,15 +180,10 @@
       background: linear-gradient(90deg, #ffeb3b, #ffc107);
     }
 
-    .progress-label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.85rem;
-      margin-bottom: 6px;
-    }
-
     @media (max-width: 480px) {
-      .counter { flex-direction: column; }
+      .counter {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
@@ -183,145 +191,168 @@
 <body>
 <div class="container">
 
-<h1>Personal Dashboard</h1>
+  <h1>Personal Dashboard</h1>
 
-<!-- AGE CALCULATOR -->
-<div class="section">
-  <form id="ageForm">
-    <label>Calculate Age as of</label>
-    <input type="date" id="customDate" required>
-    <button>Calculate Age</button>
-  </form>
+  <!-- AGE CALCULATOR -->
+  <div class="section">
+    <form id="ageForm">
+      <label>Calculate Age as of:</label>
+      <input type="date" id="customDate" required>
+      <button type="submit">Calculate Age</button>
+    </form>
 
-  <div class="counter">
-    <div>
-      <div id="years" class="number">00</div>
-      <div class="label">Years</div>
-    </div>
-    <div>
-      <div id="months" class="number">00</div>
-      <div class="label">Months</div>
-    </div>
-    <div>
-      <div id="days" class="number">00</div>
-      <div class="label">Days</div>
+    <div class="counter">
+      <div class="time-unit">
+        <div id="years" class="number">00</div>
+        <div class="label">Years</div>
+      </div>
+      <div class="time-unit">
+        <div id="months" class="number">00</div>
+        <div class="label">Months</div>
+      </div>
+      <div class="time-unit">
+        <div id="days" class="number">00</div>
+        <div class="label">Days</div>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- COUNTDOWN -->
-<div class="section">
-  <form id="futureForm">
-    <label>Future Date</label>
-    <input type="date" id="futureDate" required>
-    <label>Event Name (optional)</label>
-    <input type="text" id="eventName" placeholder="GATE, Exam, Birthday">
-    <button>Countdown</button>
-  </form>
-  <div id="countdownResult" class="countdown-display"></div>
-</div>
+  <!-- COUNTDOWN -->
+  <div class="section">
+    <form id="futureForm">
+      <label>Select Future Date:</label>
+      <input type="date" id="futureDate" required>
+      <input type="text" id="eventName" placeholder="Event name (optional)">
+      <button type="submit">Countdown</button>
+    </form>
+    <div id="countdownResult" class="countdown-display"></div>
+  </div>
 
-<!-- PROFILE INFO -->
-<div class="info-card">
-  <h2>Fauzan Ahmad</h2>
-  <p><strong>Graduate Engineer</strong> – Rockwell Automation</p>
-  <p class="quote">“Aim Big – Do it now, repeat later”</p>
+  <!-- PROFILE INFO -->
+  <div class="info-card">
+    <h2>Fauzan Ahmad</h2>
+    <p><strong>Graduate Engineer</strong> – Rockwell Automation</p>
+    <p class="quote">“Aim Big – Do it now, repeat later”</p>
 
-  <h3>AAI – Junior Executive</h3>
-  <ul>
-    <li>CTC: ₹10,36,800</li>
-    <li>Age limit: 27 (Till GATE 2027)</li>
-  </ul>
+    <h3>Personal Snapshot</h3>
+    <ul>
+      <li>Date reference: 13 December 2025</li>
+      <li>Age: 24 years, 13 days</li>
+      <li>Birth date: 30 November 2001</li>
+    </ul>
 
-  <h3>GATE Scores</h3>
-  <ul>
-    <li>2021/22 – 674</li>
-    <li>2024 – 643</li>
-    <li>2025 – Pending</li>
-  </ul>
+    <h3>AAI – Junior Executive</h3>
+    <ul>
+      <li>Total Gross Salary: ₹86,400 / month</li>
+      <li>CTC: ₹10,36,800</li>
+      <li>Age limit: 27 years (GATE 2027 – last attempt)</li>
+    </ul>
 
-  <h3>Cutoff Estimates</h3>
-  <span class="tag">50–55 → 643–698</span>
-  <span class="tag">45–49 → 653–697</span>
-  <span class="tag">54–58 → 650–700</span>
-</div>
+    <h3>GATE Performance</h3>
+    <ul>
+      <li>GATE 2021/22: 674 (440 / 187)</li>
+      <li>GATE 2024: 643 (278 / 137)</li>
+      <li>GATE 2025: —</li>
+    </ul>
 
-<!-- PROGRESS -->
-<div class="info-card">
-  <h2>Preparation Progress</h2>
+    <h3>GATE 2025 Cutoff (Expected)</h3>
+    <span class="tag">50–55 → 643–698</span>
+    <span class="tag">45–49 → 653–697</span>
+    <span class="tag">54–58 → 650–700</span>
 
-  <div class="progress-label"><span>Signals & Systems</span><span>65%</span></div>
-  <div class="progress-bar"><div class="progress-fill" style="width:65%"></div></div>
+    <h3>ISRO / DRDO / ESE</h3>
+    <ul>
+      <li>Age limit: 28–30 years</li>
+      <li>Gross salary: ₹1,16,844</li>
+      <li>CTC: ₹14,02,128</li>
+      <li>Final attempt: ESE 2029 (Age 28)</li>
+    </ul>
+  </div>
 
-  <div class="progress-label"><span>Network Theory</span><span>70%</span></div>
-  <div class="progress-bar"><div class="progress-fill" style="width:70%"></div></div>
+  <!-- PROGRESS -->
+  <div class="info-card">
+    <h2>Preparation Progress</h2>
 
-  <div class="progress-label"><span>Overall</span><span>32%</span></div>
-  <div class="progress-bar"><div class="progress-fill" style="width:32%"></div></div>
-</div>
+    <div class="progress-label">
+      <span>Signals & Systems</span><span>65%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" style="width:65%"></div></div>
 
-<!-- ROADMAP -->
-<div class="info-card">
-  <h2>Career Roadmap</h2>
-  <ul>
-    <li>Dec 2025 – Jan 2026 → S&S + Network Theory</li>
-    <li>Feb – Oct 2026 → 75–80% syllabus</li>
-    <li>GATE 2027 → PSU attempt</li>
-    <li>2027–28 → ESE preparation</li>
-    <li>ESE 2029 → Final attempt</li>
-  </ul>
-</div>
+    <div class="progress-label">
+      <span>Network Theory</span><span>70%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" style="width:70%"></div></div>
+
+    <div class="progress-label">
+      <span>Overall Syllabus</span><span>32%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" style="width:32%"></div></div>
+  </div>
+
+  <!-- ROADMAP -->
+  <div class="info-card">
+    <h2>Career Roadmap</h2>
+    <ul>
+      <li>Dec 2025 – Jan 2026 → Signals & Systems + Network Theory</li>
+      <li>Feb 2026 – Oct 2026 → 75–80% syllabus coverage</li>
+      <li>GATE 2027 → AAI / PSU target</li>
+      <li>2027–2028 → Advanced ESE preparation</li>
+      <li>ESE 2029 → Final attempt</li>
+    </ul>
+  </div>
 
 </div>
 
 <script>
-  const dob = "2001-11-30";
+  const selectedBirthday = "2001-11-30";
 
-  document.getElementById("customDate").valueAsDate = new Date();
-  document.getElementById("futureDate").valueAsDate = new Date();
-  calculateAge(new Date());
+  document.getElementById('customDate').valueAsDate = new Date();
+  document.getElementById('futureDate').valueAsDate = new Date();
+  calculateAge(new Date().toISOString().split('T')[0]);
 
   function calculateAge(date) {
-    const birth = new Date(dob);
-    const now = new Date(date);
+    const birth = new Date(selectedBirthday);
+    const current = new Date(date);
 
-    let y = now.getFullYear() - birth.getFullYear();
-    let m = now.getMonth() - birth.getMonth();
-    let d = now.getDate() - birth.getDate();
+    let y = current.getFullYear() - birth.getFullYear();
+    let m = current.getMonth() - birth.getMonth();
+    let d = current.getDate() - birth.getDate();
 
     if (d < 0) {
       m--;
-      d += new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+      d += new Date(current.getFullYear(), current.getMonth(), 0).getDate();
     }
     if (m < 0) {
       y--;
       m += 12;
     }
 
-    years.textContent = String(y).padStart(2, '0');
-    months.textContent = String(m).padStart(2, '0');
-    days.textContent = String(d).padStart(2, '0');
+    years.textContent = y.toString().padStart(2,'0');
+    months.textContent = m.toString().padStart(2,'0');
+    days.textContent = d.toString().padStart(2,'0');
   }
 
-  function countdown(date, name) {
-    const diff = Math.ceil((new Date(date) - new Date()) / (1000*60*60*24));
-    const el = document.getElementById("countdownResult");
-    el.style.display = "block";
+  function calculateDaysUntil(date, name='') {
+    const diff = new Date(date) - new Date();
+    const days = Math.ceil(diff / (1000*60*60*24));
+    const box = document.getElementById('countdownResult');
 
-    if (diff > 0) el.textContent = `${diff} days until ${name || 'event'}`;
-    else if (diff === 0) el.textContent = `🎉 ${name || 'Event'} is today`;
-    else el.textContent = `${Math.abs(diff)} days since ${name || 'event'}`;
+    box.style.display = 'block';
+    box.innerHTML =
+      days > 0 ? `${days} days until ${name || 'selected date'}` :
+      days === 0 ? `🎉 ${name || 'Event'} is today!` :
+      `${Math.abs(days)} days since ${name || 'selected date'}`;
   }
 
-  ageForm.onsubmit = e => {
+  ageForm.addEventListener('submit', e => {
     e.preventDefault();
     calculateAge(customDate.value);
-  };
+  });
 
-  futureForm.onsubmit = e => {
+  futureForm.addEventListener('submit', e => {
     e.preventDefault();
-    countdown(futureDate.value, eventName.value);
-  };
+    calculateDaysUntil(futureDate.value, eventName.value.trim());
+  });
 </script>
 
 </body>
