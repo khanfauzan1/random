@@ -9,21 +9,22 @@
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
     :root {
-      --primary-bg: linear-gradient(135deg, #1e3c72, #2a5298);
-      --glass-bg: rgba(255, 255, 255, 0.1);
-      --glass-border: rgba(255, 255, 255, 0.2);
-      --accent: #ffeb3b;
+      --page-bg: linear-gradient(135deg, #f4f6f8, #e9edf1);
+      --glass-bg: rgba(255, 255, 255, 0.75);
+      --glass-border: rgba(0, 0, 0, 0.08);
+      --accent: #6a1b9a;
+      --text-dark: #1f2937;
     }
 
     body {
       margin: 0;
       padding: 20px;
       font-family: 'Poppins', sans-serif;
-      background: var(--primary-bg);
+      background: var(--page-bg);
       min-height: 100vh;
-      color: #fff;
       display: flex;
       justify-content: center;
+      color: var(--text-dark);
     }
 
     /* MAIN CONTAINER */
@@ -33,28 +34,29 @@
       max-width: 720px;
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(10px);
       border-radius: 20px;
       padding: 35px 30px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.15);
       overflow: hidden;
     }
 
-    /* BACKGROUND LOGO */
+    /* VISIBLE LOGO BACKGROUND */
     .container::before {
       content: "";
       position: absolute;
       inset: 0;
       background: url("gate-logo.png") center no-repeat;
-      background-size: 320px;
-      opacity: 0.08;
+      background-size: 420px;
+      opacity: 0.18;
       pointer-events: none;
     }
 
     h1 {
       text-align: center;
       font-weight: 600;
-      margin-bottom: 25px;
+      margin-bottom: 30px;
+      color: #111827;
     }
 
     .section {
@@ -78,12 +80,12 @@
     }
 
     input {
-      background: rgba(255,255,255,0.15);
-      color: #fff;
+      background: rgba(0,0,0,0.05);
+      color: var(--text-dark);
     }
 
     button {
-      background: linear-gradient(135deg, #2a5298, #1e3c72);
+      background: linear-gradient(135deg, #6a1b9a, #8e24aa);
       color: #fff;
       font-weight: bold;
       cursor: pointer;
@@ -91,7 +93,6 @@
 
     .counter {
       display: flex;
-      justify-content: space-between;
       gap: 15px;
       margin-top: 20px;
       flex-wrap: wrap;
@@ -104,7 +105,7 @@
 
     .number {
       font-size: 2.2rem;
-      background: rgba(255,255,255,0.2);
+      background: rgba(0,0,0,0.06);
       border-radius: 12px;
       padding: 15px;
       margin-bottom: 6px;
@@ -112,25 +113,27 @@
     }
 
     .label {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       letter-spacing: 1px;
       text-transform: uppercase;
+      color: #374151;
     }
 
     .countdown-display {
       margin-top: 15px;
       padding: 18px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(0,0,0,0.06);
       border-radius: 12px;
       text-align: center;
       color: var(--accent);
       display: none;
+      font-weight: 600;
     }
 
     /* INFO CARDS */
     .info-card {
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.85);
+      border: 1px solid rgba(0,0,0,0.1);
       border-radius: 16px;
       padding: 24px;
       margin-bottom: 30px;
@@ -144,7 +147,7 @@
     .info-card h3 {
       margin-top: 18px;
       margin-bottom: 8px;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
     }
 
     .info-card ul {
@@ -159,7 +162,7 @@
 
     .quote {
       font-style: italic;
-      opacity: 0.9;
+      opacity: 0.85;
       margin-bottom: 10px;
     }
 
@@ -167,14 +170,18 @@
       display: inline-block;
       padding: 6px 12px;
       border-radius: 20px;
-      background: rgba(255,255,255,0.2);
+      background: rgba(106,27,154,0.12);
       font-size: 0.75rem;
       margin: 4px 6px 0 0;
+      color: #4a148c;
     }
 
     @media (max-width: 480px) {
       .counter {
         flex-direction: column;
+      }
+      .container::before {
+        background-size: 300px;
       }
     }
   </style>
@@ -218,58 +225,6 @@
       <button type="submit">Countdown</button>
     </form>
     <div id="countdownResult" class="countdown-display"></div>
-  </div>
-
-  <!-- PROFILE INFO -->
-  <div class="info-card">
-    <h2>Fauzan Ahmad</h2>
-    <p><strong>Graduate Engineer</strong> – Rockwell Automation <i>( August 2025 - Present )</i></p>
-    <p class="quote">“Aim Big – Do it now, or regret later”</p>
-
-    <h3>Personal Snapshot</h3>
-    <ul>
-      <li>Date reference: 13 December 2025</li>
-      <li>Age: 24 years, 13 days</li>
-    </ul>
-
-    <h3>AAI – Junior Executive</h3>
-    <ul>
-      <li>Total Gross Salary: ₹86,400 / month</li>
-      <li>CTC: ₹10,36,800</li>
-      <li>Age limit: 27 years (GATE 2027 – last attempt)</li>
-    </ul>
-
-    <h3>GATE Performance</h3>
-    <ul>
-      <li>GATE 20/21/22: 674 (440 / 187)</li>
-      <li>GATE 2024: 643 (278 / 137)</li>
-      <li>GATE 2025: —</li>
-    </ul>
-
-    <h3>GATE Cutoff</h3>
-    <span class="tag">50–55 → 643–698</span>
-    <span class="tag">45–49 → 653–697</span>
-    <span class="tag">54–58 → 650–700</span>
-
-    <h3>ISRO / DRDO / ESE</h3>
-    <ul>
-      <li>Age limit: 28–30 years</li>
-      <li>Gross salary: ₹1,16,844</li>
-      <li>CTC: ₹14,02,128</li>
-      <li>Final attempt: ESE 2029 (Age 28)</li>
-    </ul>
-  </div>
-
-  <!-- ROADMAP -->
-  <div class="info-card">
-    <h2>Career Roadmap</h2>
-    <ul>
-      <li>Dec 2025 – Jan 2026 → Signals & Systems + Network Theory</li>
-      <li>Feb 2026 – Oct 2026 → 75–80% syllabus coverage</li>
-      <li>GATE 2027 → AAI / PSU target</li>
-      <li>2027 – 2028 → Advanced ESE preparation</li>
-      <li>ESE 2029 → Final attempt</li>
-    </ul>
   </div>
 
 </div>
