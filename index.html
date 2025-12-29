@@ -8,7 +8,6 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-/* ================= VARIABLES ================= */
 :root {
   --bg: linear-gradient(135deg, #e8ecf3, #dfe5ef);
   --card: rgba(255,255,255,0.85);
@@ -16,7 +15,6 @@
   --text: #1f2937;
   --accent: #6a1b9a;
 }
-
 body.dark {
   --bg: linear-gradient(135deg, #020617, #020617);
   --card: rgba(15,23,42,0.9);
@@ -25,7 +23,6 @@ body.dark {
   --accent: #c084fc;
 }
 
-/* ================= BASE ================= */
 body {
   margin: 0;
   padding: 20px;
@@ -37,23 +34,20 @@ body {
   justify-content: center;
 }
 
-/* ================= CENTER LOGO (ABSOLUTELY ON TOP) ================= */
+/* CENTER LOGO */
 .center-logo {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 320px;
-  opacity: 0.35;                 /* clearly visible */
-  z-index: 999999;               /* ABOVE EVERYTHING */
+  opacity: 0.35;
+  z-index: 999999;
   pointer-events: none;
 }
+body.dark .center-logo { opacity: 0.45; }
 
-body.dark .center-logo {
-  opacity: 0.45;
-}
-
-/* ================= TOGGLE ================= */
+/* THEME TOGGLE */
 .theme-toggle {
   position: fixed;
   top: 20px;
@@ -66,7 +60,7 @@ body.dark .center-logo {
   z-index: 1000000;
 }
 
-/* ================= CONTAINER ================= */
+/* CONTAINER */
 .container {
   width: 100%;
   max-width: 720px;
@@ -76,12 +70,11 @@ body.dark .center-logo {
   padding: 35px 30px;
   box-shadow: 0 12px 40px rgba(0,0,0,0.25);
   position: relative;
-  z-index: 1;   /* LOWER than logo */
+  z-index: 1;
 }
 
-/* ================= UI ================= */
+/* UI */
 h1 { text-align:center; margin-bottom:25px; }
-
 .section { margin-bottom:35px; }
 
 label { font-size:.9rem; }
@@ -94,7 +87,6 @@ input, button {
   margin-bottom:14px;
   font-family:inherit;
 }
-
 input {
   background: rgba(0,0,0,0.08);
   color: var(--text);
@@ -105,16 +97,16 @@ button {
   background: linear-gradient(135deg,#6a1b9a,#8e24aa);
   color:#fff;
   font-weight:bold;
+  cursor:pointer;
 }
 
-/* ================= COUNTER ================= */
+/* COUNTER */
 .counter {
   display:flex;
   gap:15px;
   flex-wrap:wrap;
 }
 .time-unit { flex:1; text-align:center; }
-
 .number {
   font-size:2.2rem;
   background: rgba(0,0,0,0.08);
@@ -124,7 +116,7 @@ button {
 }
 body.dark .number { background: rgba(255,255,255,0.08); }
 
-/* ================= INFO ================= */
+/* INFO */
 .info-card {
   background: rgba(255,255,255,0.6);
   border:1px solid var(--border);
@@ -132,9 +124,7 @@ body.dark .number { background: rgba(255,255,255,0.08); }
   padding:24px;
   margin-bottom:30px;
 }
-body.dark .info-card {
-  background: rgba(15,23,42,0.75);
-}
+body.dark .info-card { background: rgba(15,23,42,0.75); }
 
 .info-card h2 { color: var(--accent); }
 .quote { font-style:italic; opacity:.85; }
@@ -148,7 +138,6 @@ body.dark .info-card {
   margin:4px 6px 0 0;
 }
 
-/* ================= MOBILE ================= */
 @media(max-width:480px){
   .center-logo { width:200px; }
   .counter { flex-direction:column; }
@@ -158,9 +147,7 @@ body.dark .info-card {
 
 <body>
 
-<!-- LOGO ON TOP -->
 <img src="gate-logo.png" class="center-logo" alt="GATE Logo">
-
 <div class="theme-toggle" onclick="toggleTheme()">🌓 Theme</div>
 
 <div class="container">
@@ -174,7 +161,6 @@ body.dark .info-card {
     <input type="date" id="customDate">
     <button>Calculate Age</button>
   </form>
-
   <div class="counter">
     <div class="time-unit"><div id="years" class="number">00</div>Years</div>
     <div class="time-unit"><div id="months" class="number">00</div>Months</div>
@@ -185,37 +171,63 @@ body.dark .info-card {
 <!-- COUNTDOWN -->
 <div class="section">
   <form id="futureForm">
+    <label>Select Future Date:</label>
     <input type="date" id="futureDate">
-    <input type="text" id="eventName" placeholder="Event name">
+    <input type="text" id="eventName" placeholder="Event name (optional)">
     <button>Countdown</button>
   </form>
   <div id="countdownResult"></div>
 </div>
 
-<!-- PROFILE -->
+<!-- PROFILE INFO -->
 <div class="info-card">
   <h2>Fauzan Ahmad</h2>
-  <p><b>Graduate Engineer</b> – Rockwell Automation</p>
+  <p><strong>Graduate Engineer</strong> – Rockwell Automation <i>(August 2025 – Present)</i></p>
   <p class="quote">“Aim Big – Do it now, or regret later”</p>
+
+  <h3>Personal Snapshot</h3>
+  <ul>
+    <li>Date reference: 13 December 2025</li>
+    <li>Age: 24 years, 13 days</li>
+  </ul>
+
+  <h3>AAI – Junior Executive</h3>
+  <ul>
+    <li>Total Gross Salary: ₹86,400 / month</li>
+    <li>CTC: ₹10,36,800</li>
+    <li>Age limit: 27 years (GATE 2027 – last attempt)</li>
+  </ul>
 
   <h3>GATE Performance</h3>
   <ul>
-    <li>2021: 674</li>
-    <li>2024: 643</li>
+    <li>GATE 20/21/22: 674 (440 / 187)</li>
+    <li>GATE 2024: 643 (278 / 137)</li>
+    <li>GATE 2025: —</li>
   </ul>
 
   <h3>GATE Cutoff</h3>
-  <span class="tag">50–55</span>
-  <span class="tag">55–60</span>
+  <span class="tag">50–55 → 643–698</span>
+  <span class="tag">45–49 → 653–697</span>
+  <span class="tag">54–58 → 650–700</span>
+
+  <h3>ISRO / DRDO / ESE</h3>
+  <ul>
+    <li>Age limit: 28–30 years</li>
+    <li>Gross salary: ₹1,16,844</li>
+    <li>CTC: ₹14,02,128</li>
+    <li>Final attempt: ESE 2029 (Age 28)</li>
+  </ul>
 </div>
 
 <!-- ROADMAP -->
 <div class="info-card">
   <h2>Career Roadmap</h2>
   <ul>
-    <li>2026 → Core</li>
-    <li>2027 → PSU</li>
-    <li>2029 → ESE</li>
+    <li>Dec 2025 – Jan 2026 → Signals & Systems + Network Theory</li>
+    <li>Feb 2026 – Oct 2026 → 75–80% syllabus coverage</li>
+    <li>GATE 2027 → AAI / PSU target</li>
+    <li>2027 – 2028 → Advanced ESE preparation</li>
+    <li>ESE 2029 → Final attempt</li>
   </ul>
 </div>
 
@@ -242,7 +254,10 @@ ageForm.onsubmit=e=>{
 futureForm.onsubmit=e=>{
   e.preventDefault();
   const diff=Math.ceil((new Date(futureDate.value)-new Date())/86400000);
-  countdownResult.textContent=diff+" days";
+  countdownResult.textContent =
+    diff>0 ? `${diff} days remaining` :
+    diff===0 ? "🎉 Today!" :
+    `${Math.abs(diff)} days passed`;
 };
 
 function toggleTheme(){
