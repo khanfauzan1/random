@@ -8,12 +8,24 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
+    /* ================= LIGHT THEME ================= */
     :root {
       --page-bg: linear-gradient(135deg, #f5f7fa, #e4e8ee);
-      --glass-bg: rgba(255, 255, 255, 0.78);
-      --glass-border: rgba(0, 0, 0, 0.08);
+      --card-bg: rgba(255,255,255,0.9);
+      --border: rgba(0,0,0,0.1);
+      --text: #1f2937;
       --accent: #6a1b9a;
-      --text-dark: #1f2937;
+      --logo-opacity: 0.18;
+    }
+
+    /* ================= DARK THEME ================= */
+    body.dark {
+      --page-bg: linear-gradient(135deg, #0f172a, #020617);
+      --card-bg: rgba(15,23,42,0.9);
+      --border: rgba(255,255,255,0.15);
+      --text: #e5e7eb;
+      --accent: #c084fc;
+      --logo-opacity: 0.28;
     }
 
     body {
@@ -21,42 +33,59 @@
       padding: 20px;
       font-family: 'Poppins', sans-serif;
       background: var(--page-bg);
+      color: var(--text);
       min-height: 100vh;
       display: flex;
       justify-content: center;
-      color: var(--text-dark);
+      transition: background 0.3s, color 0.3s;
     }
 
-    /* MAIN CONTAINER */
-    .container {
-      position: relative;
-      width: 100%;
-      max-width: 720px;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      padding: 35px 30px;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.15);
-      overflow: hidden;
-    }
-
-    /* LOGO WATERMARK */
-    .container::before {
+    /* ===== FIXED LOGO (ALWAYS VISIBLE) ===== */
+    body::before {
       content: "";
-      position: absolute;
+      position: fixed;
       inset: 0;
       background: url("gate-logo.png") center no-repeat;
       background-size: 420px;
-      opacity: 0.2;
+      opacity: var(--logo-opacity);
       pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ===== DARK MODE TOGGLE ===== */
+    .theme-toggle {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 10;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 8px 14px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+      user-select: none;
+    }
+
+    /* ===== MAIN CONTAINER ===== */
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 720px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 35px 30px;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.15);
+      backdrop-filter: blur(10px);
     }
 
     h1 {
       text-align: center;
-      font-weight: 600;
       margin-bottom: 30px;
-      color: #111827;
     }
 
     .section {
@@ -80,8 +109,12 @@
     }
 
     input {
-      background: rgba(0,0,0,0.05);
-      color: var(--text-dark);
+      background: rgba(0,0,0,0.06);
+      color: var(--text);
+    }
+
+    body.dark input {
+      background: rgba(255,255,255,0.08);
     }
 
     button {
@@ -94,8 +127,8 @@
     .counter {
       display: flex;
       gap: 15px;
-      margin-top: 20px;
       flex-wrap: wrap;
+      margin-top: 20px;
     }
 
     .time-unit {
@@ -108,32 +141,39 @@
       background: rgba(0,0,0,0.06);
       border-radius: 12px;
       padding: 15px;
-      margin-bottom: 6px;
       font-weight: bold;
+    }
+
+    body.dark .number {
+      background: rgba(255,255,255,0.08);
     }
 
     .label {
       font-size: 0.75rem;
-      letter-spacing: 1px;
       text-transform: uppercase;
-      color: #374151;
+      letter-spacing: 1px;
+      opacity: 0.8;
     }
 
     .countdown-display {
+      display: none;
       margin-top: 15px;
       padding: 18px;
       background: rgba(0,0,0,0.06);
       border-radius: 12px;
       text-align: center;
       color: var(--accent);
-      display: none;
       font-weight: 600;
+    }
+
+    body.dark .countdown-display {
+      background: rgba(255,255,255,0.08);
     }
 
     /* INFO CARDS */
     .info-card {
-      background: rgba(255,255,255,0.9);
-      border: 1px solid rgba(0,0,0,0.1);
+      background: var(--card-bg);
+      border: 1px solid var(--border);
       border-radius: 16px;
       padding: 24px;
       margin-bottom: 30px;
@@ -147,7 +187,6 @@
     .info-card h3 {
       margin-top: 18px;
       margin-bottom: 8px;
-      font-size: 1.05rem;
     }
 
     .info-card ul {
@@ -155,39 +194,32 @@
       margin: 0;
     }
 
-    .info-card li {
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-
     .quote {
       font-style: italic;
       opacity: 0.85;
-      margin-bottom: 10px;
     }
 
     .tag {
       display: inline-block;
       padding: 6px 12px;
       border-radius: 20px;
-      background: rgba(106,27,154,0.12);
+      background: rgba(106,27,154,0.15);
       font-size: 0.75rem;
       margin: 4px 6px 0 0;
-      color: #4a148c;
     }
 
     @media (max-width: 480px) {
-      .counter {
-        flex-direction: column;
-      }
-      .container::before {
-        background-size: 300px;
+      body::before {
+        background-size: 280px;
       }
     }
   </style>
 </head>
 
 <body>
+
+<div class="theme-toggle" onclick="toggleTheme()">🌓 Theme</div>
+
 <div class="container">
 
   <h1>Personal Dashboard</h1>
@@ -201,18 +233,9 @@
     </form>
 
     <div class="counter">
-      <div class="time-unit">
-        <div id="years" class="number">00</div>
-        <div class="label">Years</div>
-      </div>
-      <div class="time-unit">
-        <div id="months" class="number">00</div>
-        <div class="label">Months</div>
-      </div>
-      <div class="time-unit">
-        <div id="days" class="number">00</div>
-        <div class="label">Days</div>
-      </div>
+      <div class="time-unit"><div id="years" class="number">00</div><div class="label">Years</div></div>
+      <div class="time-unit"><div id="months" class="number">00</div><div class="label">Months</div></div>
+      <div class="time-unit"><div id="days" class="number">00</div><div class="label">Days</div></div>
     </div>
   </div>
 
@@ -286,40 +309,30 @@
 
   document.getElementById('customDate').valueAsDate = new Date();
   document.getElementById('futureDate').valueAsDate = new Date();
-  calculateAge(new Date().toISOString().split('T')[0]);
+
+  function toggleTheme() {
+    document.body.classList.toggle('dark');
+    localStorage.setItem(
+      'theme',
+      document.body.classList.contains('dark') ? 'dark' : 'light'
+    );
+  }
+
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark');
+  }
 
   function calculateAge(date) {
     const birth = new Date(selectedBirthday);
     const current = new Date(date);
-
     let y = current.getFullYear() - birth.getFullYear();
     let m = current.getMonth() - birth.getMonth();
     let d = current.getDate() - birth.getDate();
-
-    if (d < 0) {
-      m--;
-      d += new Date(current.getFullYear(), current.getMonth(), 0).getDate();
-    }
-    if (m < 0) {
-      y--;
-      m += 12;
-    }
-
+    if (d < 0) { m--; d += 30; }
+    if (m < 0) { y--; m += 12; }
     years.textContent = y.toString().padStart(2,'0');
     months.textContent = m.toString().padStart(2,'0');
     days.textContent = d.toString().padStart(2,'0');
-  }
-
-  function calculateDaysUntil(date, name='') {
-    const diff = new Date(date) - new Date();
-    const days = Math.ceil(diff / (1000*60*60*24));
-    const box = document.getElementById('countdownResult');
-
-    box.style.display = 'block';
-    box.innerHTML =
-      days > 0 ? `${days} days until ${name || 'selected date'}` :
-      days === 0 ? `🎉 ${name || 'Event'} is today!` :
-      `${Math.abs(days)} days since ${name || 'selected date'}`;
   }
 
   ageForm.addEventListener('submit', e => {
@@ -329,7 +342,10 @@
 
   futureForm.addEventListener('submit', e => {
     e.preventDefault();
-    calculateDaysUntil(futureDate.value, eventName.value.trim());
+    const diff = new Date(futureDate.value) - new Date();
+    const days = Math.ceil(diff / (1000*60*60*24));
+    countdownResult.style.display = 'block';
+    countdownResult.textContent = `${days} days remaining`;
   });
 </script>
 
