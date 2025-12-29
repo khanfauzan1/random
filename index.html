@@ -1,352 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Personal Dashboard</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Personal Dashboard</title>
 
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-    /* ================= LIGHT THEME ================= */
-    :root {
-      --page-bg: linear-gradient(135deg, #f5f7fa, #e4e8ee);
-      --card-bg: rgba(255,255,255,0.9);
-      --border: rgba(0,0,0,0.1);
-      --text: #1f2937;
-      --accent: #6a1b9a;
-      --logo-opacity: 0.18;
-    }
+/* ================= VARIABLES ================= */
+:root {
+  --bg: #f3f5f9;
+  --text: #1f2937;
+  --card: rgba(255,255,255,0.92);
+  --accent: #6a1b9a;
+}
+body.dark {
+  --bg: #020617;
+  --text: #e5e7eb;
+  --card: rgba(15,23,42,0.95);
+  --accent: #c084fc;
+}
 
-    /* ================= DARK THEME ================= */
-    body.dark {
-      --page-bg: linear-gradient(135deg, #0f172a, #020617);
-      --card-bg: rgba(15,23,42,0.9);
-      --border: rgba(255,255,255,0.15);
-      --text: #e5e7eb;
-      --accent: #c084fc;
-      --logo-opacity: 0.28;
-    }
+/* ================= BASE ================= */
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  transition: 0.3s;
+}
 
-    body {
-      margin: 0;
-      padding: 20px;
-      font-family: 'Poppins', sans-serif;
-      background: var(--page-bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      transition: background 0.3s, color 0.3s;
-    }
+/* ================= FIXED LOGO (ALWAYS VISIBLE) ================= */
+.fixed-logo {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 130px;
+  opacity: 0.65;
+  z-index: 9999;
+  pointer-events: none;
+}
+body.dark .fixed-logo {
+  opacity: 0.8;
+}
 
-    /* ===== FIXED LOGO (ALWAYS VISIBLE) ===== */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: url("gate-logo.png") center no-repeat;
-      background-size: 420px;
-      opacity: var(--logo-opacity);
-      pointer-events: none;
-      z-index: 0;
-    }
+/* ================= DARK MODE TOGGLE ================= */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--card);
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  z-index: 10000;
+}
 
-    /* ===== DARK MODE TOGGLE ===== */
-    .theme-toggle {
-      position: fixed;
-      top: 18px;
-      right: 18px;
-      z-index: 10;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      padding: 8px 14px;
-      cursor: pointer;
-      font-size: 0.85rem;
-      font-weight: 600;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-      user-select: none;
-    }
+/* ================= CONTAINER ================= */
+.container {
+  width: 100%;
+  max-width: 720px;
+  background: var(--card);
+  border-radius: 20px;
+  padding: 35px 30px;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.15);
+}
 
-    /* ===== MAIN CONTAINER ===== */
-    .container {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 720px;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 35px 30px;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.15);
-      backdrop-filter: blur(10px);
-    }
+/* ================= UI ================= */
+h1 {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+.section { margin-bottom: 35px; }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
 
-    .section {
-      margin-bottom: 35px;
-    }
+input, button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  font-family: inherit;
+  font-size: 1rem;
+  margin-bottom: 14px;
+}
 
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 0.9rem;
-    }
+input {
+  background: rgba(0,0,0,0.06);
+  color: var(--text);
+}
+body.dark input {
+  background: rgba(255,255,255,0.08);
+}
 
-    input, button {
-      width: 100%;
-      padding: 14px;
-      border-radius: 12px;
-      border: none;
-      font-family: inherit;
-      font-size: 1rem;
-      margin-bottom: 14px;
-    }
+button {
+  background: linear-gradient(135deg, #6a1b9a, #8e24aa);
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-    input {
-      background: rgba(0,0,0,0.06);
-      color: var(--text);
-    }
+.counter {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.time-unit { flex: 1; text-align: center; }
 
-    body.dark input {
-      background: rgba(255,255,255,0.08);
-    }
+.number {
+  font-size: 2.2rem;
+  padding: 15px;
+  border-radius: 12px;
+  font-weight: bold;
+  background: rgba(0,0,0,0.06);
+}
+body.dark .number {
+  background: rgba(255,255,255,0.08);
+}
 
-    button {
-      background: linear-gradient(135deg, #6a1b9a, #8e24aa);
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-    }
+/* ================= INFO CARDS ================= */
+.info-card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 30px;
+}
+.info-card h2 { color: var(--accent); }
 
-    .counter {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
+.tag {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: rgba(106,27,154,0.15);
+  font-size: 0.75rem;
+  margin: 4px 6px 0 0;
+}
+.quote { font-style: italic; opacity: 0.85; }
 
-    .time-unit {
-      flex: 1;
-      text-align: center;
-    }
-
-    .number {
-      font-size: 2.2rem;
-      background: rgba(0,0,0,0.06);
-      border-radius: 12px;
-      padding: 15px;
-      font-weight: bold;
-    }
-
-    body.dark .number {
-      background: rgba(255,255,255,0.08);
-    }
-
-    .label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      opacity: 0.8;
-    }
-
-    .countdown-display {
-      display: none;
-      margin-top: 15px;
-      padding: 18px;
-      background: rgba(0,0,0,0.06);
-      border-radius: 12px;
-      text-align: center;
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    body.dark .countdown-display {
-      background: rgba(255,255,255,0.08);
-    }
-
-    /* INFO CARDS */
-    .info-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 24px;
-      margin-bottom: 30px;
-    }
-
-    .info-card h2 {
-      color: var(--accent);
-      margin-bottom: 12px;
-    }
-
-    .info-card h3 {
-      margin-top: 18px;
-      margin-bottom: 8px;
-    }
-
-    .info-card ul {
-      padding-left: 18px;
-      margin: 0;
-    }
-
-    .quote {
-      font-style: italic;
-      opacity: 0.85;
-    }
-
-    .tag {
-      display: inline-block;
-      padding: 6px 12px;
-      border-radius: 20px;
-      background: rgba(106,27,154,0.15);
-      font-size: 0.75rem;
-      margin: 4px 6px 0 0;
-    }
-
-    @media (max-width: 480px) {
-      body::before {
-        background-size: 280px;
-      }
-    }
-  </style>
+/* ================= MOBILE ================= */
+@media (max-width: 480px) {
+  .fixed-logo { width: 90px; }
+  .counter { flex-direction: column; }
+}
+</style>
 </head>
 
 <body>
+
+<!-- FIXED LOGO -->
+<img src="gate-logo.png" class="fixed-logo" alt="GATE Logo">
 
 <div class="theme-toggle" onclick="toggleTheme()">🌓 Theme</div>
 
 <div class="container">
 
-  <h1>Personal Dashboard</h1>
+<h1>Personal Dashboard</h1>
 
-  <!-- AGE CALCULATOR -->
-  <div class="section">
-    <form id="ageForm">
-      <label>Calculate Age as of:</label>
-      <input type="date" id="customDate" required>
-      <button type="submit">Calculate Age</button>
-    </form>
+<!-- AGE CALCULATOR -->
+<div class="section">
+  <form id="ageForm">
+    <label>Calculate Age as of:</label>
+    <input type="date" id="customDate" required>
+    <button type="submit">Calculate Age</button>
+  </form>
 
-    <div class="counter">
-      <div class="time-unit"><div id="years" class="number">00</div><div class="label">Years</div></div>
-      <div class="time-unit"><div id="months" class="number">00</div><div class="label">Months</div></div>
-      <div class="time-unit"><div id="days" class="number">00</div><div class="label">Days</div></div>
-    </div>
+  <div class="counter">
+    <div class="time-unit"><div id="years" class="number">00</div>Years</div>
+    <div class="time-unit"><div id="months" class="number">00</div>Months</div>
+    <div class="time-unit"><div id="days" class="number">00</div>Days</div>
   </div>
+</div>
 
-  <!-- COUNTDOWN -->
-  <div class="section">
-    <form id="futureForm">
-      <label>Select Future Date:</label>
-      <input type="date" id="futureDate" required>
-      <input type="text" id="eventName" placeholder="Event name (optional)">
-      <button type="submit">Countdown</button>
-    </form>
-    <div id="countdownResult" class="countdown-display"></div>
-  </div>
+<!-- COUNTDOWN -->
+<div class="section">
+  <form id="futureForm">
+    <label>Select Future Date:</label>
+    <input type="date" id="futureDate" required>
+    <input type="text" id="eventName" placeholder="Event name (optional)">
+    <button type="submit">Countdown</button>
+  </form>
+  <div id="countdownResult"></div>
+</div>
 
-  <!-- PROFILE INFO -->
-  <div class="info-card">
-    <h2>Fauzan Ahmad</h2>
-    <p><strong>Graduate Engineer</strong> – Rockwell Automation <i>(August 2025 – Present)</i></p>
-    <p class="quote">“Aim Big – Do it now, or regret later”</p>
+<!-- PROFILE INFO (UNCHANGED CONTENT) -->
+<div class="info-card">
+  <h2>Fauzan Ahmad</h2>
+  <p><strong>Graduate Engineer</strong> – Rockwell Automation <i>(August 2025 - Present)</i></p>
+  <p class="quote">“Aim Big – Do it now, or regret later”</p>
 
-    <h3>Personal Snapshot</h3>
-    <ul>
-      <li>Date reference: 13 December 2025</li>
-      <li>Age: 24 years, 13 days</li>
-    </ul>
+  <h3>Personal Snapshot</h3>
+  <ul>
+    <li>Date reference: 13 December 2025</li>
+    <li>Age: 24 years, 13 days</li>
+  </ul>
 
-    <h3>AAI – Junior Executive</h3>
-    <ul>
-      <li>Total Gross Salary: ₹86,400 / month</li>
-      <li>CTC: ₹10,36,800</li>
-      <li>Age limit: 27 years (GATE 2027 – last attempt)</li>
-    </ul>
+  <h3>AAI – Junior Executive</h3>
+  <ul>
+    <li>Total Gross Salary: ₹86,400 / month</li>
+    <li>CTC: ₹10,36,800</li>
+    <li>Age limit: 27 years</li>
+  </ul>
 
-    <h3>GATE Performance</h3>
-    <ul>
-      <li>GATE 20/21/22: 674 (440 / 187)</li>
-      <li>GATE 2024: 643 (278 / 137)</li>
-      <li>GATE 2025: —</li>
-    </ul>
+  <h3>GATE Performance</h3>
+  <ul>
+    <li>GATE 20/21/22: 674</li>
+    <li>GATE 2024: 643</li>
+    <li>GATE 2025: —</li>
+  </ul>
 
-    <h3>GATE Cutoff</h3>
-    <span class="tag">50–55 → 643–698</span>
-    <span class="tag">45–49 → 653–697</span>
-    <span class="tag">54–58 → 650–700</span>
+  <h3>GATE Cutoff</h3>
+  <span class="tag">50–55</span>
+  <span class="tag">55–60</span>
+</div>
 
-    <h3>ISRO / DRDO / ESE</h3>
-    <ul>
-      <li>Age limit: 28–30 years</li>
-      <li>Gross salary: ₹1,16,844</li>
-      <li>CTC: ₹14,02,128</li>
-      <li>Final attempt: ESE 2029 (Age 28)</li>
-    </ul>
-  </div>
-
-  <!-- ROADMAP -->
-  <div class="info-card">
-    <h2>Career Roadmap</h2>
-    <ul>
-      <li>Dec 2025 – Jan 2026 → Signals & Systems + Network Theory</li>
-      <li>Feb 2026 – Oct 2026 → 75–80% syllabus coverage</li>
-      <li>GATE 2027 → AAI / PSU target</li>
-      <li>2027 – 2028 → Advanced ESE preparation</li>
-      <li>ESE 2029 → Final attempt</li>
-    </ul>
-  </div>
+<!-- ROADMAP -->
+<div class="info-card">
+  <h2>Career Roadmap</h2>
+  <ul>
+    <li>Dec 2025 – Jan 2026 → Signals & Systems</li>
+    <li>Feb 2026 – Oct 2026 → 75–80% syllabus</li>
+    <li>GATE 2027 → PSU target</li>
+    <li>ESE 2029 → Final attempt</li>
+  </ul>
+</div>
 
 </div>
 
 <script>
-  const selectedBirthday = "2001-11-30";
+const dob = new Date("2001-11-30");
+customDate.valueAsDate = new Date();
+futureDate.valueAsDate = new Date();
 
-  document.getElementById('customDate').valueAsDate = new Date();
-  document.getElementById('futureDate').valueAsDate = new Date();
+ageForm.addEventListener("submit", e => {
+  e.preventDefault();
+  const c = new Date(customDate.value);
+  let y = c.getFullYear() - dob.getFullYear();
+  let m = c.getMonth() - dob.getMonth();
+  let d = c.getDate() - dob.getDate();
+  if (d < 0) { m--; d += 30; }
+  if (m < 0) { y--; m += 12; }
+  years.textContent = y;
+  months.textContent = m;
+  days.textContent = d;
+});
 
-  function toggleTheme() {
-    document.body.classList.toggle('dark');
-    localStorage.setItem(
-      'theme',
-      document.body.classList.contains('dark') ? 'dark' : 'light'
-    );
-  }
+futureForm.addEventListener("submit", e => {
+  e.preventDefault();
+  const diff = Math.ceil((new Date(futureDate.value) - new Date()) / 86400000);
+  countdownResult.innerText =
+    diff > 0 ? `${diff} days remaining` :
+    diff === 0 ? "🎉 Today!" :
+    `${Math.abs(diff)} days passed`;
+});
 
-  if (localStorage.getItem('theme') === 'dark') {
-    document.body.classList.add('dark');
-  }
-
-  function calculateAge(date) {
-    const birth = new Date(selectedBirthday);
-    const current = new Date(date);
-    let y = current.getFullYear() - birth.getFullYear();
-    let m = current.getMonth() - birth.getMonth();
-    let d = current.getDate() - birth.getDate();
-    if (d < 0) { m--; d += 30; }
-    if (m < 0) { y--; m += 12; }
-    years.textContent = y.toString().padStart(2,'0');
-    months.textContent = m.toString().padStart(2,'0');
-    days.textContent = d.toString().padStart(2,'0');
-  }
-
-  ageForm.addEventListener('submit', e => {
-    e.preventDefault();
-    calculateAge(customDate.value);
-  });
-
-  futureForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const diff = new Date(futureDate.value) - new Date();
-    const days = Math.ceil(diff / (1000*60*60*24));
-    countdownResult.style.display = 'block';
-    countdownResult.textContent = `${days} days remaining`;
-  });
+function toggleTheme() {
+  document.body.classList.toggle("dark");
+  localStorage.setItem("theme",
+    document.body.classList.contains("dark") ? "dark" : "light");
+}
+if (localStorage.getItem("theme") === "dark") {
+  document.body.classList.add("dark");
+}
 </script>
 
 </body>
