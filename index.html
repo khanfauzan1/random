@@ -26,7 +26,9 @@
       justify-content: center;
     }
 
+    /* MAIN CONTAINER */
     .container {
+      position: relative;
       width: 100%;
       max-width: 720px;
       background: var(--glass-bg);
@@ -35,6 +37,18 @@
       border-radius: 20px;
       padding: 35px 30px;
       box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+
+    /* BACKGROUND LOGO */
+    .container::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("gate-logo.png") center no-repeat;
+      background-size: 320px;
+      opacity: 0.08;
+      pointer-events: none;
     }
 
     h1 {
@@ -114,7 +128,6 @@
     }
 
     /* INFO CARDS */
-
     .info-card {
       background: rgba(255,255,255,0.12);
       border: 1px solid rgba(255,255,255,0.25);
