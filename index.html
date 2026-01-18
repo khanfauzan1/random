@@ -255,14 +255,44 @@ ageForm.onsubmit=e=>{
   months.textContent=m;
   days.textContent=d;
 };
-
-futureForm.onsubmit=e=>{
+futureForm.onsubmit = e => {
   e.preventDefault();
-  const diff=Math.ceil((new Date(futureDate.value)-new Date())/86400000);
-  countdownResult.textContent =
-    diff>0 ? `${diff} days remaining` :
-    diff===0 ? "🎉 Today!" :
-    `${Math.abs(diff)} days passed`;
+
+  const startDate = new Date();
+  const endDate = new Date(futureDate.value);
+
+  if (isNaN(endDate)) {
+    countdownResult.textContent = "Please select a valid date";
+    return;
+  }
+
+  let years = endDate.getFullYear() - startDate.getFullYear();
+  let months = endDate.getMonth() - startDate.getMonth();
+  let days = endDate.getDate() - startDate.getDate();
+
+  // Adjust days
+  if (days < 0) {
+    months--;
+    const prevMonth = new Date(
+      endDate.getFullYear(),
+      endDate.getMonth(),
+      0
+    ).getDate();
+    days += prevMonth;
+  }
+
+  // Adjust months
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  if (years > 0 || months > 0 || days > 0) {
+    countdownResult.textContent =
+      `${years} year(s), ${months} month(s), ${days} day(s) remaining`;
+  } else {
+    countdownResult.textContent = "🎉 Today!";
+  }
 };
 
 function toggleTheme(){
